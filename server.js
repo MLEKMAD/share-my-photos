@@ -4,6 +4,7 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const path = require("path");
 const cors = require("cors");
+const parser = require('body-parser')
 
 const corsOptions = {
   origin: "http://localhost:8081",
@@ -12,7 +13,7 @@ const PORT = '8081'
 const app = express();
 app.use(express.json());
 app.use(cors(corsOptions));
-
+app.use(parser.json({strict: false}))
 const db = require('./app/models');
 
 db.mongoose

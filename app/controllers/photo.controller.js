@@ -4,6 +4,7 @@ const saveImage = async (title, image) => {
   await Image.create({
     title,
     image,
+    comment: "",
   });
 };
 // Create and Save a new Image
@@ -14,7 +15,7 @@ exports.create = async (req, res) => {
   }
   if (!Array.isArray(req.files.filename)) {
     try {
-      const {name,data} = req.files.filename;
+      const { name, data } = req.files.filename;
       const image = await saveImage(name, data);
       res.status(200).send(image);
     } catch (error) {
@@ -24,7 +25,7 @@ exports.create = async (req, res) => {
   } else {
     try {
       req.files.filename.forEach(async (file) => {
-        const image = saveImage(file.name, file.data)
+        const image = saveImage(file.name, file.data);
       });
       res.status(200).send("images were created successfully");
     } catch (error) {
@@ -34,11 +35,30 @@ exports.create = async (req, res) => {
   }
 };
 
+// Add comment
+exports.comment = async (req, res) => {
+  const id = req.params.id;
+  const { comment } = req.body;
+  if (!id) {
+    return res.status(400).send({
+      message: "Id is needed!",
+    });
+  }
+  console.log("id to update: ", id);
+  const image = await Image.find({ _id: id });
+  console.log("image: ", image);
+  const updatedImage = await Image.updateOne(
+    { _id: id },
+    { $set: { comment } }
+  );
+  res.status(201).send(`image with id : ${id} was updated successfully`);
+};
+
 // Retrieve all Images from the database.
 exports.findAll = (req, res) => {
   Image.find()
     .then((data) => {
-      res.send(data);
+      res.status(200).send(data);
     })
     .catch((err) => {
       res.status(500).send({
@@ -84,7 +104,8 @@ exports.update = (req, res) => {
         res.status(404).send({
           message: `Cannot update Image with id=${id}. Maybe Image was not found!`,
         });
-      } else res.send({ message: "Image was updated successfully." });
+      } else
+        res.status(204).send({ message: "Image was updated successfully." });
     })
     .catch((err) => {
       res.status(500).send({
@@ -130,4 +151,15 @@ exports.deleteAll = (req, res) => {
           err.message || "Some error occurred while removing all Images.",
       });
     });
+};
+
+// Find by comment
+exports.findByComment = async (req, res) => {
+  const { comment } = req.body;
+  const images = await Image.find({ comment });
+  console.log("images: ", images);
+  if (!images) {
+    res.status(404).send("No photos were found");
+  }
+  res.status(200).send(images);
 };
