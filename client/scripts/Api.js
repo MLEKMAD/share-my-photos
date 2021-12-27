@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Create a instance of axios to use the same base url.
 const axiosAPI = axios.create({
-  baseURL : "https://localhost:8081/api/" // it's not recommended to have this info here.
+  baseURL : "http://localhost:8081/api/" 
 });
 
 // implement a method to execute all the request from here.
