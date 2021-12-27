@@ -1,11 +1,18 @@
 const Image = require("../models/image.model");
 
-const saveImage = async (title, image) => {
-  await Image.create({
-    title,
-    image,
-    comment: "",
-  });
+const saveImage = async (title, data, imgType) => {
+  try {
+    await Image.create({
+      title,
+      img: {
+        data,
+        contentType: imgType,
+      },
+      comment: "",
+    });
+  } catch(err) {
+    console.log('error:', err)
+  }
 };
 // Create and Save a new Image
 exports.create = async (req, res) => {
@@ -13,19 +20,20 @@ exports.create = async (req, res) => {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
-  if (!Array.isArray(req.files.filename)) {
+  if (!Array.isArray(req.files.photo)) {
     try {
-      const { name, data } = req.files.filename;
-      const image = await saveImage(name, data);
-      res.status(200).send(image);
+      const { name, data, mimetype } = req.files.photo;
+      console.log("data", data);
+      const image = await saveImage(name, data, mimetype);
+      res.status(200).send("Image successfully added!");
     } catch (error) {
       console.log(error);
       res.status(500).send(error);
     }
   } else {
     try {
-      req.files.filename.forEach(async (file) => {
-        const image = saveImage(file.name, file.data);
+      req.files.photo.forEach(async (file) => {
+        const image = saveImage(file.name, file.data, file.mimetype);
       });
       res.status(200).send("images were created successfully");
     } catch (error) {
