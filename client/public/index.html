@@ -11,6 +11,16 @@
 	<link rel='stylesheet' href='/build/bundle.css'>
 
 	<script defer src='/build/bundle.js'></script>
+	<!-- add before </body> -->
+<script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
+<script>
+    // Register the plugin
+    FilePond.registerPlugin(FilePondPluginImageExifOrientation);
+
+    // ... FilePond initialisation code here
+</script>
 </head>
 
 <body>

@@ -1,25 +1,28 @@
 <script>
-  import { onMount } from "svelte";
-  import { getPhotos, postPhotos } from "../scripts/photos";
-  let images;
-  onMount(async () => {
-    const response = await getPhotos();
-    console.log("response", response);
-  });
-
+	import Display from "./Display.svelte";
+	import Post from "./Post.svelte";
+	
+	export let menu = 1;
 </script>
 
-<h1>Share my photos beaaaaaach</h1>
-<form action='http://localhost:8081/api/photos' enctype="multipart/form-data" method="post" >
-<label for="avatar">Upload images here:</label>
-<input
-  accept="image/png, image/jpeg"
-  bind:this={images}
-  id="image"
-  multiple
-  name="photo"
-  type="file"
-/>
-<input type='submit' />
-</form>
+<style>
+	ul#menu li{
+		display : inline;
+	}
+</style>
+
+<ul id="menu">
+	<li><a href="/" on:click|preventDefault={() => (menu = 1)}>Photos</a></li> |
+	<li><a href="/" on:click|preventDefault={() => (menu = 2)}>Add a picture</a></li>
+</ul>
+
+{#if menu === 1}
+<Display />
+{:else if menu === 2}
+<Post />
+{:else}
+<h1>
+	Page Not Found
+</h1>
+{/if}
 
