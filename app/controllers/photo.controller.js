@@ -18,6 +18,7 @@ const saveImage = async (title, data, imgType) => {
 // Create and Save a new Image
 exports.create = async (req, res) => {
   try {
+    console.log('request', req.files.photo)
     const { name, data, mimetype } = req.files.photo;
     const imageId = await saveImage(name, data, mimetype);
     console.log("Image", imageId);

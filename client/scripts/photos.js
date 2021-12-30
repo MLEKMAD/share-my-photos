@@ -2,21 +2,21 @@ import Api from "./Api";
 
 export const getPhotos = async () => {
     try {
-      const response = await Api.get("/photos");
+      const response = await Api.get("/");
       return response;
     } catch (error) {
       console.error(error);
     }
 };
 
-export const postPhotos = async (payload) => {
+
+export const deletePhoto = async (fileId) => {
   try {
-    console.log("Payload:", payload)
-    const response = await Api.post("/photos", payload)
-    console.log("response", response)
+    console.log({fileId})
+    const response = await Api.delete(`/${fileId}`)
+    console.log("delete response", response)
   } catch (error) {
     console.log(error)
     throw error;
   }
 }
-

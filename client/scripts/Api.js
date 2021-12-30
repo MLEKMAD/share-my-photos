@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Create a instance of axios to use the same base url.
 const axiosAPI = axios.create({
-  baseURL : "http://localhost:8081/api/" 
+  baseURL : "http://localhost:8081/api/photos" 
 });
 
 // implement a method to execute all the request from here.

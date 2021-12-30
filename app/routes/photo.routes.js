@@ -17,7 +17,7 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // Create a new photo
-  router.post("/", upload.single("image"), photos.create);
+  router.post("/", upload.single("photo"), photos.create);
 
   // Comment to a photo
   router.patch("/:id/comment", photos.comment);
