@@ -1,11 +1,14 @@
 const multer = require("multer");
+const fs = require('fs-extra')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "/public/images");
+    let path = `./public/uploads`;
+    fs.mkdirsSync(path);
+    cb(null, path)
   },
   filename: (req, file, cb) => {
-    cb(null, file.fieldname + "-" + Date.now());
+    cb(null, Date.now() + '-' + file.originalname  );
   },
 });
 
@@ -17,7 +20,7 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // Create a new photo
-  router.post("/", upload.single("photo"), photos.create);
+  router.post("/", upload.single('photo'), photos.create);
 
   // Comment to a photo
   router.patch("/:id/comment", photos.comment);

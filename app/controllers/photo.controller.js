@@ -1,13 +1,10 @@
 const Image = require("../models/image.model");
 
-const saveImage = async (title, data, imgType) => {
+const saveImage = async (title, filename) => {
   try {
     const addedImg = await Image.create({
       title,
-      img: {
-        data,
-        contentType: imgType,
-      },
+      filename,
       comment: "",
     });
     return addedImg._id;
@@ -16,13 +13,13 @@ const saveImage = async (title, data, imgType) => {
   }
 };
 // Create and Save a new Image
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
   try {
-    console.log('request', req.files.photo)
-    const { name, data, mimetype } = req.files.photo;
-    const imageId = await saveImage(name, data, mimetype);
+    console.log("request", req.file);
+    const { originalname, filename } = req.file;
+    const imageId = await saveImage(originalname, filename);
     console.log("Image", imageId);
-    res.status(200).send({imageId});
+    res.status(200).send({ imageId });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -52,6 +49,7 @@ exports.comment = async (req, res) => {
 exports.findAll = (req, res) => {
   Image.find()
     .then((data) => {
+      console.log({ data });
       res.status(200).send(data);
     })
     .catch((err) => {
@@ -86,11 +84,8 @@ exports.update = (req, res) => {
   console.log("req: ", req.files);
   const id = req.params.id;
   const newImage = {
-    title: req.files.filename.name,
-    img: {
-      data: req.files.data,
-      contentType: "image/png",
-    },
+    title: req.file.filename,
+    filename: req.file.originalname
   };
   Image.findByIdAndUpdate(id, newImage, { useFindAndModify: false })
     .then((data) => {

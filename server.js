@@ -1,7 +1,6 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const express = require("express");
-const fileUpload = require("express-fileupload");
 const path = require("path");
 const cors = require("cors");
 const parser = require('body-parser')
@@ -29,18 +28,8 @@ db.mongoose
     process.exit();
   });
 
-
-app.use(fileUpload());
-
-// app.post("/upload", (req, res) => {
-//   if (!req.files) {
-//     return res.status(400).send("No files were uploaded.");
-//   }
-// });
-
-
 require('./app/routes/photo.routes')(app);
-
+app.use("/images", express.static('public/uploads'))
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });

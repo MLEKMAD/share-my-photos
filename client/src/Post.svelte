@@ -8,18 +8,10 @@
     FilePondPluginImageExifOrientation,
     FilePondPluginImagePreview
   );
-  // a reference to the component, used to call FilePond methods
   let pond;
 
 
-  // handle filepond events
-  // const handleInit = () => {
-  //   console.log("FilePond has initialised");
-  // };
 
-  // const handleAddFile = async (err, fileItem) => {
-  //   console.log("A file has been added", fileItem);
-  // };
   const handleRemove = async (fileId) => {
     const { imageId } = JSON.parse(fileId);
     try {
@@ -28,6 +20,14 @@
       console.error("Error", e);
     }
   };
+  const handleFinish = () => {
+    if (pond.getFiles().length != 0) {
+    for (var i = 0; i <= pond.getFiles().length - 1; i++) {
+      pond.removeFile(pond.getFiles()[0].id)
+    }
+  }
+  myMenu = 1
+  }
 </script>
 
 <div class="post-card">
@@ -45,4 +45,5 @@
     dropValidation={true}
   />
 </div>
+<button on:click={handleFinish}>finish</button>
 

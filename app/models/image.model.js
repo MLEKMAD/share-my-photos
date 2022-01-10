@@ -4,10 +4,7 @@ const Schema = mongoose.Schema;
 const ImageSchema = new Schema(
   {
     title: String,
-    img: {
-      data: Buffer,
-      contentType: String,
-    },
+    filename: String,
     comment: String
   },
   { timestamps: true }
