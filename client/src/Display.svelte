@@ -2,10 +2,9 @@
   import { onMount } from "svelte";
   import { getPhotos } from "../scripts/photos";
   import Gallery from "svelte-image-gallery";
-
   const handleClick = (e) => {
     console.log("here");
-    console.log(e.detail.url);
+    console.log(e.detail.src);
   };
   let images = [];
   onMount(async () => {
@@ -18,14 +17,13 @@
 <h1>
   My Photos
 
-</h1>
-<Gallery gap="12">
-  {#each images as image}
+</h1> <Gallery gap="12" on:click={handleClick}> 
+ {#each images as image}
     <img
-      on:click={handleClick}
       src={`http://localhost:8081/images/${image.filename}`}
       alt={image.title}
     />
+    <div class="chan" on:click={()=>{fileinput.click();}}>Choose Image</div>
   {/each}
 </Gallery>
 

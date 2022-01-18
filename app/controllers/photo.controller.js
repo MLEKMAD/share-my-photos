@@ -1,5 +1,6 @@
 const Image = require("../models/image.model");
-
+const fs = require('fs')
+const path = require('path')
 const saveImage = async (title, filename) => {
   try {
     const addedImg = await Image.create({
@@ -114,6 +115,15 @@ exports.delete = (req, res) => {
           message: `Cannot delete Image with id=${id}. Maybe Image was not found!`,
         });
       } else {
+        let path = `public/uploads/${data.filename}`
+        fs.unlink(path, (err) => {
+          if (err) {
+            console.error(err)
+            return
+          }
+        
+          //file removed
+        })
         res.send({
           message: "Image was deleted successfully!",
         });
@@ -130,7 +140,16 @@ exports.delete = (req, res) => {
 exports.deleteAll = (req, res) => {
   Image.deleteMany({})
     .then((data) => {
-      res.send({
+      let directory = 'public/uploads'
+      fs.readdir(directory, (err, files) => {
+        if (err) throw err;
+      
+        for (const file of files) {
+          fs.unlink(path.join(directory, file), err => {
+            if (err) throw err;
+          });
+        }
+      });      res.send({
         message: `${data.deletedCount} Images were deleted successfully!`,
       });
     })

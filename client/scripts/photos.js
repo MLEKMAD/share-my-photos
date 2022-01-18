@@ -5,7 +5,7 @@ export const getPhotos = async () => {
       const response = await Api.get("/");
       return response;
     } catch (error) {
-      console.error(error);
+      console.error("Error: ",error);
     }
 };
 

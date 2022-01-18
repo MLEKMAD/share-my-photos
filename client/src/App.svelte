@@ -24,6 +24,7 @@
       <a href="#"><Link to="/add-photos">Add Picture</Link></a>
     </div>
   </div>
+  <Route path="/"><Display /></Route>
   <Route path="/display-photos"><Display /></Route>
   <Route path="/add-photos"><Post /></Route>
 </Router>
