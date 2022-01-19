@@ -1565,7 +1565,12 @@
   dependencies:
     "svelte2tsx" "^0.1.157"
 
-"svelte@^3.0.0", "svelte@^3.20.x", "svelte@^3.23.0", "svelte@^3.24", "svelte@>=3.5.0":
+"svelte-simple-modal@^1.2.0":
+  "integrity" "sha512-uiKQ3/iNMepzMkaw15wHpP+GieuuB8SDg+Mm+8uiS3hQDJAyjc8ApR/YtUlZs77d779sJ3lukhao+WkmoIyxzA=="
+  "resolved" "https://registry.npmjs.org/svelte-simple-modal/-/svelte-simple-modal-1.2.0.tgz"
+  "version" "1.2.0"
+
+"svelte@^3.0.0", "svelte@^3.20.x", "svelte@^3.23.0", "svelte@^3.24", "svelte@^3.31.2", "svelte@>=3.5.0":
   "integrity" "sha512-aGgrNCip5PQFNfq9e9tmm7EYxWLVHoFsEsmKrtOeRD8dmoGDdyTQ+21xd7qgFd8MNdKGSYvg7F9dr+Tc0yDymg=="
   "resolved" "https://registry.npmjs.org/svelte/-/svelte-3.44.3.tgz"
   "version" "3.44.3"

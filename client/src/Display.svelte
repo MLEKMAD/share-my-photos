@@ -1,31 +1,44 @@
 <script>
   import { onMount } from "svelte";
   import { getPhotos } from "../scripts/photos";
+  import { images } from "./ImageModal/stores.js";
   import Gallery from "svelte-image-gallery";
-  const handleClick = (e) => {
-    console.log("here");
-    console.log(e.detail.src);
+  import { writable } from "svelte/store";
+  import Modal from "svelte-simple-modal";
+  import Popup from "./ImageModal/Popup.svelte";
+  import { imageShowingIndex } from "./ImageModal/stores";
+
+
+  const modal = writable(null);
+  const showModal = (e) => {
+    $imageShowingIndex = $images.findIndex(
+      (element) =>
+        `http://localhost:8081/images/${element.filename}` === e.detail.src
+    );
+    modal.set(Popup);
   };
-  let images = [];
   onMount(async () => {
     const response = await getPhotos();
-    images = response;
-    console.log({ images });
+    $images = [...response];
+    console.log({ $images });
   });
 </script>
 
-<h1>
-  My Photos
+<Modal  onClose={()=>{console.log('cloosed')}} show={$modal} styleWindow={{ width: "60%",display: "block"}}>
+  
+  <section>
+    <h1>My Photos</h1>
+    <Gallery gap="12" on:click={showModal}>
+      {#each $images as image}
+        <img
+          src={`http://localhost:8081/images/${image.filename}`}
+          alt={image.title}
+        />
+      {/each}
+    </Gallery>
+  </section>
 
-</h1> <Gallery gap="12" on:click={handleClick}> 
- {#each images as image}
-    <img
-      src={`http://localhost:8081/images/${image.filename}`}
-      alt={image.title}
-    />
-    <div class="chan" on:click={()=>{fileinput.click();}}>Choose Image</div>
-  {/each}
-</Gallery>
+</Modal>
 
 <style>
   :global(img) {

@@ -20,3 +20,15 @@ export const deletePhoto = async (fileId) => {
     throw error;
   }
 }
+
+export const commentPhoto = async (fileId, payload) => {
+  try {
+    console.log({fileId})
+    console.log({payload})
+    const response = await Api.patch(`/${fileId}/comment`, payload)
+    console.log("delete response", response)
+  } catch (error) {
+    console.log(error)
+    throw error;
+  }
+}
