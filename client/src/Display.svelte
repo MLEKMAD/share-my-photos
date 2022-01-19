@@ -24,8 +24,8 @@
   });
 </script>
 
-<Modal  onClose={()=>{console.log('cloosed')}} show={$modal} styleWindow={{ width: "60%",display: "block"}}>
-  
+<Modal  show={$modal} styleWindow={{ width: "60%",display: "block"}}>
+  {#if $images.length}
   <section>
     <h1>My Photos</h1>
     <Gallery gap="12" on:click={showModal}>
@@ -37,7 +37,9 @@
       {/each}
     </Gallery>
   </section>
-
+  {:else}
+  <p>Add photo to your Album</p>
+  {/if}
 </Modal>
 
 <style>

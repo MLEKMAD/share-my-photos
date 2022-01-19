@@ -23,7 +23,7 @@ module.exports = (app) => {
   router.post("/", upload.single('photo'), photos.create);
 
   // Comment to a photo
-  router.patch("/:id/comment", photos.comment);
+  router.post("/:id/comment", photos.comment);
 
   // Retrieve all photos
   router.get("/", photos.findAll);

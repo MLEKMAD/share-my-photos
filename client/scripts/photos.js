@@ -25,8 +25,8 @@ export const commentPhoto = async (fileId, payload) => {
   try {
     console.log({fileId})
     console.log({payload})
-    const response = await Api.patch(`/${fileId}/comment`, payload)
-    console.log("delete response", response)
+    const response = await Api.post(`/${fileId}/comment`, payload)
+    console.log("update response", response)
   } catch (error) {
     console.log(error)
     throw error;
