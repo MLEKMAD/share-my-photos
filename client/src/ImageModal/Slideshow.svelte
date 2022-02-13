@@ -8,16 +8,19 @@
   import { Link } from "svelte-routing";
   import { writable } from 'svelte/store';
 
+  let keyCode;
+ // Using keyboard to move between slides
+  function handleKeydown(event) {
+    keyCode = event.keyCode;
+    keyCode == 39 ? nextSlide() : keyCode == 37 ? prevSlide() : null;
+  }
 
   const commentModal = writable(null);
+
   const showCommentModal = (e) => {
-	  console.log('here')
     commentModal.set(CommentPopup);
   };
-  const commentOnPhoto = () => {
-    let picture = $images[$imageShowingIndex];
-    console.log({ picture });
-  };
+
   const deleteAPhoto = async () => {
 	if($images.length){
     let picture = $images[$imageShowingIndex];
@@ -54,6 +57,8 @@
 
   export const goToSlide = (number) => ($imageShowingIndex = number);
 </script>
+<svelte:window on:keydown={handleKeydown} />
+
 <Modal show={$commentModal}>
 	{#if $images.length}
 <main>
@@ -94,7 +99,7 @@
   }
 
   main {
-    /* width: 70vw; */
+    width: 70vw;
     display: flex;
     flex-direction: column;
     margin: 10% auto;

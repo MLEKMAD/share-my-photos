@@ -2,6 +2,8 @@
   import Display from "./Display.svelte";
   import Post from "./Post.svelte";
   import { Router, Link, Route } from "svelte-routing";
+  import Slideshow from "./ImageModal/Slideshow.svelte";
+import SlideshowSync from "./ImageModal/SlideshowSync.svelte";
   export let url = "";
 </script>
 
@@ -20,13 +22,15 @@
     </div>
 
     <div class="nav-links">
-      <a href="#"><Link to="/display-photos">Photos</Link></a>
-      <a href="#"><Link to="/add-photos">Add Picture</Link></a>
+      <a href="/display-photos">Photos</a>
+      <a href="/slideshow">Slideshow</a>
+      <a href="/add-photos">Add Picture</a>
     </div>
   </div>
   <Route path="/"><Display /></Route>
   <Route path="/display-photos"><Display /></Route>
   <Route path="/add-photos"><Post /></Route>
+  <Route path="/slideshow"><SlideshowSync /></Route>
 </Router>
 
 <style>

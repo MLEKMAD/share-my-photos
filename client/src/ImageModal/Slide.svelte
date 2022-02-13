@@ -18,13 +18,17 @@
 }
 	
 img {
-	width: 100%
+max-width: 100%;
+max-height: auto;
 }	
+.img-responsive{
+    margin:0 auto;
+}
 </style>
 
 
 <!-- Full-width images with number text -->
 <div class="mySlides">
 	<div class="numbertext">{slideNo} / {totalSlides}</div>
-	<img src={image} alt={altTag} title={attr}>
+	<img src={image} alt={altTag} title={attr} class="img-responsive">
 </div>

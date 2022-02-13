@@ -1,15 +1,17 @@
 <script>
-  import { commentPhoto } from "../../scripts/photos";
+  import { commentPhoto, getPhotos } from "../../scripts/photos";
   import { images, imageShowingIndex } from "./stores.js";
   let comment = "";
   const updateComment = (e) => {
     e.preventDefault();
     let picture = $images[$imageShowingIndex];
-    console.log({ picture });
-    console.log("event", e);
     commentPhoto(picture._id, {comment})
-    images.update(images => {return images = [...images]})
+    images.update( async images => {return images = [...await getPhotos()]})
+    closeModal();
   };
+  const closeModal = () => {
+    console.log('closing...')
+  }
 </script>
 
 <form method="post">

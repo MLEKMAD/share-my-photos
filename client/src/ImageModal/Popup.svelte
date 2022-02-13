@@ -1,13 +1,12 @@
 <script>
-	import Slideshow from './Slideshow.svelte'
+  import Slideshow from "./Slideshow.svelte";
 </script>
 
-<style>
-	img {
-		width: 100%
-	}
-</style>
-
-
-
 <Slideshow />
+
+<style>
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+</style>

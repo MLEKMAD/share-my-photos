@@ -22,9 +22,7 @@
   };
   const handleFinish = () => {
     if (pond.getFiles().length != 0) {
-    for (var i = 0; i <= pond.getFiles().length - 1; i++) {
-      pond.removeFile(pond.getFiles()[i].id)
-    }
+    pond.removeFiles()
   }
   myMenu = 1
   }

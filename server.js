@@ -6,7 +6,7 @@ const cors = require("cors");
 const parser = require('body-parser')
 
 const corsOptions = {
-  origin: "http://localhost:8081",
+  origin: "http://localhost:5000",
 };
 const PORT = '8081'
 const app = express();
