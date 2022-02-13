@@ -19,7 +19,7 @@
 	
 img {
 max-width: 100%;
-max-height: auto;
+max-height: 100%;
 }	
 .img-responsive{
     margin:0 auto;

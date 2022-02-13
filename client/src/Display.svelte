@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { getPhotos } from "../scripts/photos";
+  import { findByComment, getPhotos } from "../scripts/photos";
   import { images } from "./ImageModal/stores.js";
   import Gallery from "svelte-image-gallery";
   import { writable } from "svelte/store";
@@ -9,6 +9,7 @@
   import { imageShowingIndex } from "./ImageModal/stores";
 
 
+  let comment;
   const modal = writable(null);
   const showModal = (e) => {
     $imageShowingIndex = $images.findIndex(
@@ -22,12 +23,27 @@
     $images = [...response];
     console.log({ $images });
   });
+
+  const getByComment = async () => {
+    let response = await findByComment(comment);
+    console.log({response})
+    images.update(  images => {return images = [...response]})
+
+  }
+  // const handleOnInput = (e) => {
+  //   console.log(e.target.value)
+  //   if(!e.target.value){
+  //     images.update( async images => {return images = [...await getPhotos()]})
+  //   }
+  // }
 </script>
 
 <Modal  show={$modal} styleWindow={{ width: "60%",display: "block"}}>
   {#if $images.length}
   <section>
     <h1>My Photos</h1>
+      <input type="text" name="filter"  bind:value={comment} placeholder="search"/>
+      <button class="primary" on:click={getByComment}>Search</button>
     <Gallery gap="12" on:click={showModal}>
       {#each $images as image}
         <img

@@ -26,9 +26,21 @@ export const commentPhoto = async (fileId, payload) => {
     console.log({fileId})
     console.log({payload})
     const response = await Api.post(`/${fileId}/comment`, payload)
-    console.log("update response", response)
+    console.log("comment response", response)
   } catch (error) {
     console.log(error)
     throw error;
   }
 }
+
+  export const findByComment = async (comment) => {
+    try {
+      const response = await Api.get(`/comment`, {params:{comment}})
+      console.log("find by comment response", response)
+      return response
+    } catch (error) {
+      console.log(error)
+      throw error;
+    }
+  }
+

@@ -16,6 +16,7 @@ const apiRequest = (method, url, request) => {
         method,
         url,
         data: request,
+        params: request,
         headers
       }).then(res => {
         return Promise.resolve(res.data);

@@ -3,11 +3,11 @@
   import { images, imageShowingIndex } from "./stores.js";
   let comment = "";
   const updateComment = (e) => {
-    e.preventDefault();
     let picture = $images[$imageShowingIndex];
     commentPhoto(picture._id, {comment})
-    images.update( async images => {return images = [...await getPhotos()]})
+    //images.update( async images => {return images = [...await getPhotos()]})
     closeModal();
+    
   };
   const closeModal = () => {
     console.log('closing...')
@@ -18,3 +18,4 @@
   <input type="text" bind:value={comment} />
   <button on:click={updateComment}>update</button>
 </form>
+

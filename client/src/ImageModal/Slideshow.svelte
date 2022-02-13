@@ -66,7 +66,7 @@
   <div class="container">
 	  
     <Slide
-      image={`http://localhost:8081/images/${image.filename || ""}`}
+      image={`http://localhost:8081/images/${image.filename || " "}`}
       altTag={image.title}
       slideNo={$imageShowingIndex + 1}
       totalSlides={$images.length}
@@ -99,12 +99,12 @@
   }
 
   main {
-    width: 70vw;
+    /* width: 70vw; */
     display: flex;
     flex-direction: column;
-    margin: 10% auto;
+    /* margin: 10% auto; */
     background-color: #222;
-    box-shadow: 0 0 10px black;
+    /* box-shadow: 0 0 10px black; */
   }
 
   /* Position the image container (needed to position the left and right arrows) */

@@ -163,8 +163,10 @@ exports.deleteAll = (req, res) => {
 
 // Find by comment
 exports.findByComment = async (req, res) => {
-  const { comment } = req.body;
-  const images = await Image.find({ comment });
+  const { params } = req.query;
+  let {comment} = JSON.parse(params)
+  console.log({comment})
+  const images = await Image.find({ comment:{$regex:comment} });
   console.log("images: ", images);
   if (!images) {
     res.status(404).send("No photos were found");
