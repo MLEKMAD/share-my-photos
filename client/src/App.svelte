@@ -11,7 +11,7 @@ import SlideshowSync from "./ImageModal/SlideshowSync.svelte";
   <div class="nav">
     <input type="checkbox" id="nav-check" />
     <div class="nav-header">
-      <div class="nav-title">Share My Photos</div>
+      <div class="nav-title nav-links">SMP</div>
     </div>
     <div class="nav-btn">
       <label for="nav-check">
@@ -34,14 +34,15 @@ import SlideshowSync from "./ImageModal/SlideshowSync.svelte";
 </Router>
 
 <style>
-  ul#myMenu li {
+
+  :global(ul#myMenu li) {
     display: inline;
   }
   * {
     box-sizing: border-box;
   }
 
-  body {
+  :global(body) {
     margin: 0px;
     font-family: "segoe ui";
   }

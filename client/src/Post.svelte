@@ -3,6 +3,8 @@
   import { deletePhoto } from "../scripts/photos";
   import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
   import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+  import { navigate } from "svelte-routing";
+
   // Register the plugins
   registerPlugin(
     FilePondPluginImageExifOrientation,
@@ -24,7 +26,7 @@
     if (pond.getFiles().length != 0) {
     pond.removeFiles()
   }
-  myMenu = 1
+  navigate("/display-photos", { replace: true });
   }
 </script>
 
@@ -45,3 +47,6 @@
 </div>
 <button on:click={handleFinish}>finish</button>
 
+<style>
+
+</style>

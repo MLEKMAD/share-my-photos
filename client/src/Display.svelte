@@ -59,6 +59,11 @@
 </Modal>
 
 <style>
+    :global(body) {
+    margin: 0px;
+    font-family: "segoe ui";
+    background: no-repeat url('C:/Users/AmnayTitane/Documents/share-my-photos/client/src/cool-background.png')
+  }
   :global(img) {
     opacity: 0.9;
     transition: all 0.2s;
