@@ -14,8 +14,8 @@
   const showModal = (e) => {
     $imageShowingIndex = $images.findIndex(
       (element) =>
-        `http://localhost:8081/images/${element.filename}` === e.detail.src
-    );
+        `http://localhost:8081/images/${element.filename}` === e.detail.src.replace(/%20/g, " ")
+      );
     modal.set(Popup);
   };
   onMount(async () => {
@@ -62,7 +62,6 @@
     :global(body) {
     margin: 0px;
     font-family: "segoe ui";
-    background: no-repeat url('C:/Users/AmnayTitane/Documents/share-my-photos/client/src/cool-background.png')
   }
   :global(img) {
     opacity: 0.9;
