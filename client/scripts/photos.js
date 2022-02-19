@@ -1,5 +1,8 @@
 import Api from "./Api";
-
+/**
+ * 
+ * @returns images from server
+ */
 export const getPhotos = async () => {
     try {
       const response = await Api.get("/");
@@ -9,7 +12,10 @@ export const getPhotos = async () => {
     }
 };
 
-
+/**
+ * 
+ * @param {*} fileId the id of the image
+ */
 export const deletePhoto = async (fileId) => {
   try {
     console.log({fileId})
@@ -20,7 +26,11 @@ export const deletePhoto = async (fileId) => {
     throw error;
   }
 }
-
+/**
+ * 
+ * @param {*} fileId the id of the image we want to comment
+ * @param {*} payload the comment 
+ */
 export const commentPhoto = async (fileId, payload) => {
   try {
     console.log({fileId})
@@ -33,6 +43,11 @@ export const commentPhoto = async (fileId, payload) => {
   }
 }
 
+/**
+ * 
+ * @param {*} comment the filter with which we look for the images
+ * @returns the images that contains the filter
+ */
   export const findByComment = async (comment) => {
     try {
       const response = await Api.get(`/comment`, {params:{comment}})

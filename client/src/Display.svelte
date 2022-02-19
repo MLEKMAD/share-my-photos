@@ -14,7 +14,7 @@
   const showModal = (e) => {
     $imageShowingIndex = $images.findIndex(
       (element) =>
-        `http://localhost:8081/images/${element.filename}` === e.detail.src.replace(/%20/g, " ")
+      encodeURI(`http://localhost:8081/images/${element.filename}`) === e.detail.src
       );
     modal.set(Popup);
   };

@@ -36,7 +36,7 @@
 	}
   };
   /* IMAGE TO SHOW */
-  $: console.log({$images})
+  $: console.log({$images, $imageShowingIndex})
   $: image = $images[$imageShowingIndex];
 
   const nextSlide = () => {
