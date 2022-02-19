@@ -23,7 +23,7 @@
 
   const deleteAPhoto = async () => {
 	if($images.length){
-    let picture = $images[$imageShowingIndex];
+    let picture = $images[$imageShowingIndex >= $images.length ? -1 : $imageShowingIndex];
     console.log({ picture });
     try {
       const res = await deletePhoto(picture._id);
@@ -32,12 +32,18 @@
     }
 	images.update(images => {images.splice($imageShowingIndex,1);
 	return images = [...images]})
-	nextSlide();
+  if ($imageShowingIndex >= $images.length) {
+    prevSlide();
+    }
+  else{
+    nextSlide();
+  }
+	
 	}
   };
   /* IMAGE TO SHOW */
   $: console.log({$images, $imageShowingIndex})
-  $: image = $images[$imageShowingIndex];
+  $: image = $images[$imageShowingIndex >= $images.length ? -1 : $imageShowingIndex];
 
   const nextSlide = () => {
     if ($imageShowingIndex === $images.length - 1) {
